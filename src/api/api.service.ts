@@ -52,7 +52,9 @@ export class ApiService {
         }),
       )
       .then(() => {
-        console.log((locations.join('').toLowerCase().match(/l/g) || []).length);
+        console.log(
+          (locations.join('').toLowerCase().match(/l/g) || []).length,
+        );
       });
 
     return 0;
