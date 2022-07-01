@@ -1,8 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { Observable, lastValueFrom, map } from 'rxjs';
-import { AxiosResponse } from 'axios';
-import { getArrayOfEndpoints } from '../utils/getArrayOfEndpoints';
+import { rickAndMortyApiService } from '../utils/rickAndMortyApiService';
 
 @Injectable()
 export class ApiService {
@@ -10,29 +8,9 @@ export class ApiService {
 
   async getCharCounter(): Promise<object> {
     const timeNow = new Date().getTime();
-    const arrayOfLocationsId = await getArrayOfEndpoints();
-    const allLocationsData: Observable<string[]> = this.httpService
-      .get(`https://rickandmortyapi.com/api/location/${arrayOfLocationsId[0]}`)
-      .pipe(map((response: AxiosResponse) => response.data));
-    const allEpisodesData: Observable<string[]> = this.httpService
-      .get(`https://rickandmortyapi.com/api/episode/${arrayOfLocationsId[1]}`)
-      .pipe(map((response: AxiosResponse) => response.data));
-    const allCharactersData: Observable<string[]> = this.httpService
-      .get(`https://rickandmortyapi.com/api/character/${arrayOfLocationsId[2]}`)
-      .pipe(map((response: AxiosResponse) => response.data));
-    const unwrapLocationData: any[] = await lastValueFrom(allLocationsData);
-    const unwrapEpisodesData: any[] = await lastValueFrom(allEpisodesData);
-    const unwrapCharactersData: any[] = await lastValueFrom(allCharactersData);
-
-    const locationNames: string[] = unwrapLocationData.map(
-      (location) => location.name,
-    );
-    const episodesNames: string[] = unwrapEpisodesData.map(
-      (episode) => episode.name,
-    );
-    const charactersNames: string[] = unwrapCharactersData.map(
-      (character) => character.name,
-    );
+    const rickAndMortyApi = new rickAndMortyApiService(this.httpService);
+    const [locationNames, episodesNames, charactersNames] =
+      await rickAndMortyApi.getNames();
     const charLCounter = (
       locationNames.join('').toLowerCase().match(/l/g) || []
     ).length;
@@ -42,7 +20,7 @@ export class ApiService {
     const charCCounter = (
       charactersNames.join('').toLowerCase().match(/c/g) || []
     ).length;
-    const totalTime = (new Date().getTime() - timeNow) / 1000
+    const totalTime = (new Date().getTime() - timeNow) / 1000;
 
     const inTime = totalTime <= 3 ? true : false;
 
