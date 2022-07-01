@@ -2,29 +2,19 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { Observable, lastValueFrom, map } from 'rxjs';
 import axios, { AxiosResponse } from 'axios';
+import { response } from 'express';
+import { getPages } from '../utils/getPages';
 
 @Injectable()
 export class ApiService {
   constructor(private readonly httpService: HttpService) {}
 
-  getCharCounter(): any {
-    const pages = lastValueFrom(
-      this.httpService
-        .get('https://rickandmortyapi.com/api/location')
-        .pipe(map((response: AxiosResponse) => response.data.info.pages)),
-    );
-    const locations: any = [];
-    axios
-      .all([
-        axios.get('https://rickandmortyapi.com/api/location?page=1'),
-        axios.get('https://rickandmortyapi.com/api/location?page=2'),
-        axios.get('https://rickandmortyapi.com/api/location?page=3'),
-        axios.get('https://rickandmortyapi.com/api/location?page=4'),
-        axios.get('https://rickandmortyapi.com/api/location?page=5'),
-        axios.get('https://rickandmortyapi.com/api/location?page=6'),
-        axios.get('https://rickandmortyapi.com/api/location?page=7'),
-      ])
-      .then(
+  async getCharCounter(): Promise<any> {
+    const locationPages = await getPages();
+    const locations: string[] = [];
+    const charCounterPromise = await Promise
+      .all(locationPages.map((url) => axios.get(url)))
+   /*  const temp = await
         axios.spread((...responses) => {
           locations.push(
             responses[0].data.results.map(
@@ -50,13 +40,10 @@ export class ApiService {
             ),
           );
         }),
-      )
-      .then(() => {
-        console.log(
-          (locations.join('').toLowerCase().match(/l/g) || []).length,
-        );
-      });
+     */
+    //    return (locations.join('').toLowerCase().match(/l/g) || []).length;
 
+console.log(charCounterPromise[0].data.results)
     return 0;
   }
 }
