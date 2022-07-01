@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
-export const getArrayOfEndpoints = async (): Promise<any> => {
-  const response: any = await axios.all([
+
+export const getArrayOfEndpoints = async (): Promise<any[]> => {
+  const response = await axios.all([
     axios.get('https://rickandmortyapi.com/api/location/'),
     axios.get('https://rickandmortyapi.com/api/episode/'),
     axios.get('https://rickandmortyapi.com/api/character/'),
