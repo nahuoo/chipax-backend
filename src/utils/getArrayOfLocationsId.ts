@@ -6,7 +6,7 @@ export const getArrayOfLocationsId = async (): Promise<number[]> => {
   //create array from 0 to locationsCount
   const endpointOfLocationsIds: number[] = Array.from(
     { length: locationsCount },
-    (_, i) => i,
+    (_, i) => i+1,
   );
   return endpointOfLocationsIds;
 };
