@@ -9,4 +9,8 @@ export class ApiController {
   async getCharCounter() {
     return this.apiService.getCharCounter();
   }
+  @Get('episodes-locations')
+  async getEpisodeLocations() {
+    return this.apiService.getCharCounter();
+  }
 }
