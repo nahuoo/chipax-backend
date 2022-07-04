@@ -11,6 +11,6 @@ export class ApiController {
   }
   @Get('episodes-locations')
   async getEpisodeLocations() {
-    return this.apiService.getCharCounter();
+    return this.apiService.getEpisodesLocations();
   }
 }

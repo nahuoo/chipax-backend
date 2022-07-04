@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { rickAndMortyApiService } from '../utils/rickAndMortyApiService';
+import { Character, Episode } from './interfaces/responses.interface';
 
 @Injectable()
 export class ApiService {
@@ -45,6 +46,57 @@ export class ApiService {
           resource: 'character',
         },
       ],
+    };
+  }
+
+  async getEpisodesLocations() {
+    const timeNow = new Date().getTime();
+    const rickAndMortyApi = new rickAndMortyApiService(this.httpService);
+    const { unwrapEpisodesData, unwrapCharactersData } =
+      await rickAndMortyApi.getEpisodes();
+
+    const charactersOfEachEpisodeId = unwrapEpisodesData.map(
+      (episode: Episode) => {
+        return episode.characters.map((character) => {
+          const characterId = character.split('/').pop();
+          return characterId;
+        });
+      },
+    );
+    const charactersOriginNames: string[] = unwrapCharactersData.map(
+      (character: Character) => character.origin.name,
+    );
+
+    const charactersOriginNamesOfEachEpisode = charactersOfEachEpisodeId.map(
+      (charactersOfAnEpisode) => {
+        return charactersOfAnEpisode.map((characterId) => {
+          return charactersOriginNames[characterId - 1];
+        });
+      },
+    );
+
+    const charactersOriginNamesOfEachEpisodeNoRepetitions =
+      charactersOriginNamesOfEachEpisode.map((charactersOfAnEpisode) => {
+        return [...new Set(charactersOfAnEpisode)];
+      });
+
+    const result = unwrapEpisodesData.map((episode: Episode, index) => {
+      return {
+        name: episode.name,
+        episode: episode.episode,
+        location: charactersOriginNamesOfEachEpisodeNoRepetitions[index],
+      };
+    });
+
+    const totalTime = (new Date().getTime() - timeNow) / 1000;
+
+    const inTime = totalTime <= 3 ? true : false;
+
+    return {
+      exercise_name: 'Episode locations',
+      time: totalTime + 's',
+      in_time: inTime,
+      results: result,
     };
   }
 }

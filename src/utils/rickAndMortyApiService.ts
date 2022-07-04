@@ -32,4 +32,18 @@ export class rickAndMortyApiService {
     );
     return [locationNames, episodesNames, charactersNames];
   };
+
+  getEpisodes = async (): Promise<any> => {
+    const arrayOfDataId = await getArrayOfEndpoints();
+    const allEpisodesData: Observable<string[]> = this.httpService
+      .get(`https://rickandmortyapi.com/api/episode/${arrayOfDataId[1]}`)
+      .pipe(map((response: AxiosResponse) => response.data));
+    const allCharactersData: Observable<string[]> = this.httpService
+      .get(`https://rickandmortyapi.com/api/character/${arrayOfDataId[2]}`)
+      .pipe(map((response: AxiosResponse) => response.data));
+    const unwrapEpisodesData: any[] = await lastValueFrom(allEpisodesData);
+    const unwrapCharactersData: any[] = await lastValueFrom(allCharactersData);
+
+    return { unwrapEpisodesData, unwrapCharactersData };
+  };
 }
