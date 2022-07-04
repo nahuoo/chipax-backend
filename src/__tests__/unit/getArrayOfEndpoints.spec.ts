@@ -1,9 +1,10 @@
-import { getArrayOfEndpoints } from '../../src/utils/getArrayOfEndpoints'
+import { getArrayOfEndpoints } from '../../utils/getArrayOfEndpoints'
 
-describe('getArrayOfEndpoints', () => {
-  it('should return an array with 3 endpoints', () => {
-    const arrayOfEndpoints = getArrayOfEndpoints()
+test('should return an array with 3 endpoints', async () => {
+  const arrayOfEndpoints = await getArrayOfEndpoints()
 
-    expect(arrayOfEndpoints).toEqual([Number, Number, Number])
-  })
+  expect(arrayOfEndpoints.length).toBe(3)
+  expect(arrayOfEndpoints[0].length).toBe(126)
+  expect(arrayOfEndpoints[1].length).toBe(51)
+  expect(arrayOfEndpoints[2].length).toBe(826)
 })
