@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return the api endpoints', () => {
-      expect(appController.getHello()).toBe({
+      expect(appController.getHello()).toEqual({
         char_counter: '/api/char-counter',
         episode_locations: '/api/episodes-locations',
       })
