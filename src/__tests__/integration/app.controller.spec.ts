@@ -15,8 +15,11 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return the api endpoints', () => {
+      expect(appController.getHello()).toBe({
+        char_counter: '/api/char-counter',
+        episode_locations: '/api/episodes-locations',
+      })
     });
   });
 });
