@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export const getArrayOfEndpoints = async (): Promise<any[]> => {
   const response = await axios.all([
     axios.get('https://rickandmortyapi.com/api/location/'),
