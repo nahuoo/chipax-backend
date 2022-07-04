@@ -41,7 +41,7 @@ Requiere [Node](http://nodejs.org)
 Clonar el repositorio
 
 ```bash
-  npm run deploy
+  git clone https://github.com/nahuoo/chipax-backend.git
 ```
 
 Instalar
