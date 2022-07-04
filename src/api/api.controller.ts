@@ -1,5 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiService } from './api.service';
+import { Controller, Get } from '@nestjs/common'
+import { ApiService } from './api.service'
 
 @Controller('api')
 export class ApiController {
@@ -7,10 +7,10 @@ export class ApiController {
 
   @Get('char-counter')
   async getCharCounter() {
-    return this.apiService.getCharCounter();
+    return this.apiService.getCharCounter()
   }
   @Get('episodes-locations')
   async getEpisodeLocations() {
-    return this.apiService.getEpisodesLocations();
+    return this.apiService.getEpisodesLocations()
   }
 }

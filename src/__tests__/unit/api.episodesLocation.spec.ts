@@ -5,7 +5,7 @@ import { HttpModule } from '@nestjs/axios'
 describe('ApiService method getEpisodesLocaation', () => {
   let service
   let episodesLocations
-  
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [HttpModule],
