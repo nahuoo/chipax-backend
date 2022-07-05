@@ -4,7 +4,7 @@
 API desarrollado para el desafio Chipax => https://www.notion.so/Rick-and-Morty-Challenge-84a1b794dc09429fb3178c2a24e7c217
 ## Demo
 
-https://chipax-backend.herokuapp.com/
+[Demo-Heroku](https://chipax-backend-demo.herokuapp.com/)
 
 
 ## Dependecias
