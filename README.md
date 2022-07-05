@@ -1,20 +1,21 @@
 
-# Chipax-Challenge/Backend
+# Chipax-Challenge/Backend 🔬
 
 API desarrollado para el desafio Chipax => https://www.notion.so/Rick-and-Morty-Challenge-84a1b794dc09429fb3178c2a24e7c217
-## Demo
+![Logo](https://c4.wallpaperflare.com/wallpaper/347/251/683/rick-and-morty-oh-mama-run-the-jewels-wallpaper-preview.jpg)
+## Demo 😃
 
-https://chipax-backend.herokuapp.com/
+[Demo-Heroku](https://chipax-backend-demo.herokuapp.com/)
 
 
-## Dependecias
+## Dependecias 📃
 
 **Server:** [Nest](https://github.com/nestjs/nest) framework
 
 [Axios](https://axios-http.com/), [Prettier](https://prettier.io/), [eslint](https://eslint.org/), [Jest](https://jestjs.io/)
 
 
-## API Referencias
+## API Referencias 👀
 
 ####  Char counter
 
@@ -41,10 +42,10 @@ Requiere [Node](http://nodejs.org)
 Clonar el repositorio
 
 ```bash
-  npm run deploy
+  git clone https://github.com/nahuoo/chipax-backend.git
 ```
 
-Instalar
+Instalar 💾
 
 ```bash
   npm install
@@ -57,7 +58,6 @@ Correr en local
   
  # modo watch
  npm run start:dev
-
  # modo produccion
  npm run start:prod
 ```
@@ -67,20 +67,8 @@ Correr en local
 ```bash
 # unit tests
  npm run test
-
 # e2e tests
  npm run test:e2e
-
 # test coverage
  npm run test:cov
 ```
-
-## lint
-
-```bash
- npm run lint
-```
-## Autor
-
-- [@nahuoo](https://www.github.com/nahuoo)
-
