@@ -6,6 +6,7 @@ API desarrollado para el desafio Chipax => https://www.notion.so/Rick-and-Morty-
 ## Demo 😃
 
 [Demo-Heroku](https://chipax-backend-demo.herokuapp.com/)
+[Demo - Vercel - Frontend](https://chipax-frontend.vercel.app/)
 
 
 ## Dependecias 📃
