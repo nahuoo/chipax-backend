@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { rickAndMortyApiService } from '../utils/rickAndMortyApiService'
 import { Character, Episode } from './interfaces/responses.interface'
+import { charCounter } from '../utils/charCounter'
 
 @Injectable()
 export class ApiService {
@@ -12,15 +13,11 @@ export class ApiService {
     const rickAndMortyApi = new rickAndMortyApiService(this.httpService)
     const [locationNames, episodesNames, charactersNames] =
       await rickAndMortyApi.getNames()
-    const charLCounter = (
-      locationNames.join('').toLowerCase().match(/l/g) || []
-    ).length
-    const charECounter = (
-      episodesNames.join('').toLowerCase().match(/e/g) || []
-    ).length
-    const charCCounter = (
-      charactersNames.join('').toLowerCase().match(/c/g) || []
-    ).length
+
+    const charLCounter = charCounter(locationNames, 'l')
+    const charECounter = charCounter(episodesNames, 'e')
+    const charCCounter = charCounter(charactersNames, 'c')
+
     const totalTime = (new Date().getTime() - timeNow) / 1000
 
     const inTime = totalTime <= 3 ? true : false
