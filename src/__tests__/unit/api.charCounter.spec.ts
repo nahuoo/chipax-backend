@@ -5,6 +5,28 @@ import { HttpModule } from '@nestjs/axios'
 describe('ApiService method charCounter', () => {
   let service
   let charCounter
+  const expected = {
+    exercise_name: 'Char counter',
+    time: 1 + 's',
+    in_time: true,
+    results: [
+      {
+        char: 'l',
+        count: Number,
+        resource: 'location',
+      },
+      {
+        char: 'e',
+        count: 3,
+        resource: 'episode',
+      },
+      {
+        char: 'c',
+        count: 3,
+        resource: 'character',
+      },
+    ],
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -21,5 +43,6 @@ describe('ApiService method charCounter', () => {
     expect(charCounter.results[0].count).toEqual(82)
     expect(charCounter.results[1].count).toEqual(88)
     expect(charCounter.results[2].count).toEqual(494)
+    expect(charCounter).toHaveProperty('time')
   })
 })
